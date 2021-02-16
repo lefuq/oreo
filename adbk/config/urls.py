@@ -15,7 +15,26 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from adbk.book_app.viewsets import AddresseeViewSet, MailViewSet, PhoneViewSet
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('ad_book/', AddresseeViewSet.as_view({
+        'post': 'list',
+        'put': 'create'})),
+    path('ad_book/<int:pk>/', AddresseeViewSet.as_view({
+        'post': 'retrieve',
+        'patch': 'partial_update',
+        'delete': 'destroy'})),
+    path('mails/', MailViewSet.as_view({'post': 'list', 'put': 'create'})),
+    path('mails/<int:pk>/', MailViewSet.as_view({
+        'post': 'retrieve',
+        'patch': 'partial_update',
+        'delete': 'destroy'})),
+    path('phones/', PhoneViewSet.as_view({'post': 'list', 'put': 'create'})),
+    path('phones/<int:pk>/', PhoneViewSet.as_view({
+        'post': 'retrieve',
+        'patch': 'partial_update',
+        'delete': 'destroy'})),
 ]
